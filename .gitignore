@@ -1,3 +1,5 @@
 smartsheetclient.egg-info
 smartsheet-python-sdk/
 dist
+.DS_Store
+*.pyc

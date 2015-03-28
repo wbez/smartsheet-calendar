@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+
+    <!-- META TAGS -->
+
+    <!-- CHARTBEAT -->
+    <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+
+    <!-- CSS -->
+
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro|Lora|Roboto+Condensed|Roboto' rel='stylesheet' type='text/css'>
+
+    {% block extra_head %}
+    {% endblock extra_head %}
+</head>
+<body>
+
+    <nav role="navigation">
+      <a class="wbez-logo" href="http://wbez.org">
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="25" viewBox="0 0 673.5 181.6" enable-background="new 0 0 673.5 181.6" xml:space="preserve">
+        <g>
+         <path fill="#ED1C24" d="M439,128.4v7.9c0,10,3.4,14.7,11.3,14.7c7.9,0,12.3-4.7,12.3-14.7v-35.9c-6.8,6.8-11,10.2-21.7,10.2c-15.3,0-28-8.9-28-31.4V60.8c0-32.3,11-46.7,37.4-46.7c26.3,0,37.4,13.2,37.4,42v73.5 c0,28.9-11,42-37.4,42c-20.8,0.4-34.2-14.4-34.2-34v-9.3H439z M462.6,49.6c0-10-4.5-14.6-12.3-14.6c-7.9,0-12.3,4.7-12.3,14.6v25.5c0,10,4.5,14.6,11,14.6c4.7,0,10.4-4.5,13.6-7V49.6z"></path>
+          <path fill="#ED1C24" d="M519,48.1h-20.8V33.9c11.7-5.9,22.5-12.3,31.2-19.7h13.4v155.4H519V48.1z"></path>
+          <rect x="554.9" y="144.5" fill="#ED1C24" width="25.1" height="25.1"></rect>
+          <path fill="#ED1C24" d="M613.6,125.2v12.3c0,8.3,4.7,13.4,11.7,13.4c8.3,0,13-4.9,13-18.7V97.4c0-10-5.1-14-11-14c-8.1,0-11.9,5.3-14.2,11.7h-20.4c0.8-23.8,1.9-42.5,1.9-78.8h63.9l-0.8,21.7h-41.4L614.6,71l0.4,0.4c6.6-7.9,12.1-8.9,20.2-8.9c20.2,0,28,14.7,28,40.3v21.2c0,32.3-10.2,47.6-35.7,47.6c-21.2,0-37.8-9.3-37.8-34.8v-11.7H613.6z"></path>
+          <polygon fill="#FFFFFF" points="66.5,17.9 88,17.9 105.7,114.9 106.1,114.9 120.7,17.9 145.1,17.9 118.4,170.2 96.4,170.2 77.5,69.6 77,69.6 59.3,170.2 37.4,170.2 8.5,17.9 33,17.9 49,114.9 49.4,114.9"></polygon>
+          <path fill="#FFFFFF" d="M152.5,17.9h38.8c28,0,40.5,14.3,40.5,40.3c0,13.1-5.5,26.8-18.1,31.8c13.3,5.9,21.1,16.5,21.1,36.1c0,25.1-11.2,44.1-40.9,44.1h-41.3V17.9z M178.6,80.4h9.5c9.9,0,17.5-6.7,17.5-19.4 c0-14.1-5.5-21.5-17.1-21.5h-9.9V80.4z M178.6,148.7h11c13.9,0,19-8,19-23.4c0-15.6-5.9-23.4-21.5-23.4h-8.4V148.7z"></path>
+          <polygon fill="#FFFFFF" points="244.9,170.2 244.9,17.9 314.9,17.9 314.9,40.7 271.1,40.7 271.1,79.9 304.8,79.9 304.8,102.7 271.1,102.7 271.1,147.4 317.9,147.4 317.9,170.2"></polygon>
+          <polygon fill="#FFFFFF" points="330.6,40.7 330.6,17.9 399.7,17.9 399.7,42.8 351.6,147.4 399.7,147.4 399.7,170.2 324.7,170.2 324.7,145.3 373.4,40.7"></polygon>
+        </g>
+        </svg>
+      </a>
+        
+        <span class="headline"></span>
+  
+        <ul class="social-links">
+            <li class="twitter"><a rel="external" href="http://twitter.com/share?text={{ SHOWS}}&amp;url={{ SHARE_URL|urlencode }}" alt="Share on Twitter" target="_blank" onclick="_gaq.push(['_trackEvent', '{{ PROJECT_SLUG }}', 'tweet', 'nav']);"><i class="fa fa-twitter"></i></a></li>
+            <li class="facebook"><a rel="external" href="https://www.facebook.com/sharer/sharer.php?u={{SHOWS}}" alt="Share on Facebook" target="_blank" onclick="_gaq.push(['_trackEvent', '{{ PROJECT_SLUG }}', 'facebook', 'nav']);"><i class="fa fa-facebook"></i></a></li>
+
+        </ul>
+
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+    {% block extra_foot %}
+    {% endblock extra_foot %}
+
+    
+
+</body>
+</html>

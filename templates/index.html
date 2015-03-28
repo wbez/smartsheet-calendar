@@ -1,0 +1,50 @@
+{% extends '_base.html' %}
+
+
+{% block content %}
+
+<div class="container-fluid">
+
+    {% for day in SHOWS %}
+        <div class="col-sm-4 col-md-3 frame">
+          <div class="location"></div>
+          <div class="title">{{day}}</div>
+          <div class="main-caption visible-xs"></div>
+        </div>
+        {% if loop.index is divisibleby 5 %}
+          <div class="clearfix"></div>
+        {% endif %}
+
+    {% endfor %}
+
+</div>
+
+{% endblock content %}
+
+{% block extra_foot %}
+
+<script>
+$( document ).ready(function() {
+
+  var setClick = function(){
+    if ($(window).width() > 768) {
+      $('.frame').click(function(){
+          var image = $(this).children().attr('src');
+          var caption = $(this).find('.main-caption').text();
+          $('.modal-content').css('background-image', 'url(' + image + ')');
+          $('.caption-text').text(caption);
+          $('#photoModal').modal()
+      })
+    } else {
+      $('.frame').unbind();
+    }
+  }
+  setClick();
+
+  $( window ).resize(function() {
+    setClick();
+  });
+});
+</script>
+
+{% endblock extra_foot %}
