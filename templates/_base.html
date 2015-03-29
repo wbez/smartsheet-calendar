@@ -10,8 +10,10 @@
     <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
 
     <!-- CSS -->
-
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">  
+    <link href="static/smartsheet.css" rel="stylesheet">    
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro|Lora|Roboto+Condensed|Roboto' rel='stylesheet' type='text/css'>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
     {% block extra_head %}
     {% endblock extra_head %}
@@ -35,12 +37,6 @@
       </a>
         
         <span class="headline"></span>
-  
-        <ul class="social-links">
-            <li class="twitter"><a rel="external" href="http://twitter.com/share?text={{ SHOWS}}&amp;url={{ SHARE_URL|urlencode }}" alt="Share on Twitter" target="_blank" onclick="_gaq.push(['_trackEvent', '{{ PROJECT_SLUG }}', 'tweet', 'nav']);"><i class="fa fa-twitter"></i></a></li>
-            <li class="facebook"><a rel="external" href="https://www.facebook.com/sharer/sharer.php?u={{SHOWS}}" alt="Share on Facebook" target="_blank" onclick="_gaq.push(['_trackEvent', '{{ PROJECT_SLUG }}', 'facebook', 'nav']);"><i class="fa fa-facebook"></i></a></li>
-
-        </ul>
 
     </nav>
 
@@ -51,6 +47,5 @@
     {% endblock extra_foot %}
 
     
-
 </body>
 </html>

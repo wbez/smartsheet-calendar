@@ -6,7 +6,7 @@
 <div class="container-fluid">
 
     {% for day in SHOWS %}
-        <div class="col-sm-4 col-md-3 frame">
+        <div class="col-sm-2 frame">
           <div class="location"></div>
           <div class="title">{{day}}</div>
           <div class="main-caption visible-xs"></div>
@@ -22,7 +22,10 @@
 {% endblock content %}
 
 {% block extra_foot %}
-
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script>
 $( document ).ready(function() {
 
