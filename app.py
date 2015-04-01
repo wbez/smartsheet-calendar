@@ -5,7 +5,7 @@ import json
 import argparse
 from flask import Flask, make_response, render_template
 
-from smartsheet_test import make_context
+from smartsheet import make_context
 
 app = Flask(__name__)
 

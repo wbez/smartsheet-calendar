@@ -17,20 +17,22 @@ def make_context():
 
 	sheet = client.fetchSheetById(showboardsid)
 	context = {}
-	context['SHOWS'] = OrderedDict()
+	context['DAYS'] = OrderedDict()
 	columns = [col.title for col in sheet.columns]
 
 	for row in sheet.rows:
 		show  = row[0]
 		if show != None:
 			day = row[3]
-			#day = datetime.strptime(row[3],'%Y-%m-%d')
+			day_obj = datetime.strptime(row[3],'%Y-%m-%d')
+			day_of_week = day_obj.strftime('%A')
+			date_str = day_obj.strftime('%b %d').lstrip("0").replace(" 0", " ")
 			
-			if day not in context['SHOWS']: 
-				context['SHOWS'][day] = {}
-			if show not in context['SHOWS'][day]: 
-				context['SHOWS'][day][show] = []
-			
+			if day not in context['DAYS']: 
+				context['DAYS'][day] = {'day_of_week': day_of_week, 'date_str':date_str, 'shows':{}}
+			if show not in context['DAYS'][day]['shows']: 
+				context['DAYS'][day]['shows'].update({show:[]})
+
 			day_context = {}
 			day_context['show'] = show
 			day_context['status'] = row[1]
@@ -40,6 +42,7 @@ def make_context():
 			day_context['reporter']  = row[6]
 			day_context['category']  = row[7]
 
-			context['SHOWS'][day][show].append(day_context)
+			context['DAYS'][day]['shows'][show].append(day_context)
 
+	context['DAYS'] = OrderedDict(sorted(context['DAYS'].iteritems(), key=lambda x: x[0]))
 	return context

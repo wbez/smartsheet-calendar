@@ -4,20 +4,32 @@
 {% block content %}
 
 <div class="container-fluid">
-
-    {% for day in SHOWS %}
+    <div class="row">
+        <div class="col-sm-1 frame"></div>
+        {% for key,value in DAYS.iteritems() %}
         <div class="col-sm-2 frame">
-          <div class="location"></div>
-          <div class="title">{{day}}</div>
-          <div class="main-caption visible-xs"></div>
+          <div class="day">{{value.day_of_week}}</div>
+          <div class="date">{{value.date_str}}</div>
+          {% for show,segments in value.shows.iteritems() %}
+            <div class="show">{{show}}</div>
+            {% for segment in segments %}
+              <div class="{{segment.status}}">
+                Segment: {{segment.segment}} Story: {{segment.story_slug}} Type: {{segment.segment_type}} Reporter: {{segment.reporter}} Category: {{segment.category}}
+              </div>
+            {% endfor %}
+          {% endfor %}
         </div>
         {% if loop.index is divisibleby 5 %}
+
           <div class="clearfix"></div>
+          <div class="col-sm-1 frame"></div>
+
         {% endif %}
 
     {% endfor %}
-
+  </div>
 </div>
+
 
 {% endblock content %}
 
