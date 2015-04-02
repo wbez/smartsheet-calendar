@@ -20,18 +20,24 @@ body, html{
 .show {
 	font-size: 18px;
 	margin-bottom: 5px;
+	color:#fff;
+	background-color: #333;
+}
+
+.story {
+	font-size: 14px;
 }
 
 .Green {
-	background-color: green;
+	background-color: #2ca25f;
 }
 
 .Red {
-	background-color: red;
+	background-color: #fee0d2;
 }
 
 .Yellow {
-	background-color: yellow;
+	background-color: #fff7bc;
 }
 
 nav {

@@ -14,7 +14,7 @@
             <div class="show">{{show}}</div>
             {% for segment in segments %}
               <div class="{{segment.status}}">
-                Segment: {{segment.segment}} Story: {{segment.story_slug}} Type: {{segment.segment_type}} Reporter: {{segment.reporter}} Category: {{segment.category}}
+                <span class="story">{{segment.story_slug}}</span> - {{segment.reporter}}
               </div>
             {% endfor %}
           {% endfor %}
@@ -30,7 +30,7 @@
   </div>
 </div>
 
-
+{{DAYS}}
 {% endblock content %}
 
 {% block extra_foot %}
