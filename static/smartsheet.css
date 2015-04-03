@@ -17,11 +17,18 @@ body, html{
 	font-size: 36px;
 }
 
+.date {
+	font-size: 16px;
+	text-align: center;
+	font-style: italic
+}
+
 .show {
 	font-size: 18px;
 	margin-bottom: 5px;
 	color:#fff;
-	background-color: #333;
+	background-color: #666;
+	padding:0px 5px;
 }
 
 .story {
@@ -33,11 +40,11 @@ body, html{
 }
 
 .Red {
-	background-color: #fee0d2;
+	background-color: #de2d26;
 }
 
 .Yellow {
-	background-color: #fff7bc;
+	background-color: #f7fcb9;
 }
 
 nav {

@@ -5,7 +5,7 @@ import os
 
 def make_context():
 	today = datetime.today().strftime('%Y-%m-%d')
-	two_days_ago = datetime.today()-timedelta(days=2)
+	two_days_ago = datetime.today()-timedelta(days=3)
 
 	token = os.getenv('SMARTSHEET_TOKEN')
 
