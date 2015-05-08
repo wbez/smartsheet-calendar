@@ -18,7 +18,7 @@ body, html{
 }
 
 .date {
-	font-size: 16px;
+	font-size: 24px;
 	text-align: center;
 	font-style: italic
 }
@@ -32,19 +32,29 @@ body, html{
 }
 
 .story {
-	font-size: 14px;
+	font-size: 24px;
+}
+
+.segment {
+	font-family:'Roboto',Arial,sans-serif;
+	margin-bottom: 5px;
+	padding:5px 10px 5px 10px;
+}
+
+.reporter {
+	font-size: 16px;
 }
 
 .Green {
-	background-color: #2ca25f;
+	background-color: #a6d96a;
 }
 
 .Red {
-	background-color: #de2d26;
+	background-color: #fdae61;
 }
 
 .Yellow {
-	background-color: #f7fcb9;
+	background-color: #ffffbf;
 }
 
 nav {
@@ -120,7 +130,7 @@ nav {
 
 .location {
 	font-size:14px;
-	font-faily: 'Roboto Condensed',Arial,sans-serif;
+	font-faily: 'Roboto',Arial,sans-serif;
 	text-align:left;
 	padding-left:5px;
 	background-color:#000;

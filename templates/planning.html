@@ -2,30 +2,31 @@
 
 
 {% block content %}
+
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-1 frame"></div>
-        {% for key,value in showboards.DAYS.iteritems() %}
+        {% for key,value in planning.DAYS.iteritems() %}
         <div class="col-sm-2 frame">
           <div class="day">{{value.day_of_week}}</div>
           <div class="date">{{value.date_str}}</div>
-          {% for show,segments in value.shows.iteritems() %}
-            <div class="show">{{show}}</div>
-            {% for segment in segments %}
-              <div class="{{segment.status}} segment">
-                <div class="story">{{segment.story_slug}}: {{segment.reporter}}</div>
+          {% for cast,items in value.casts.iteritems() %}
+            {% for item in items %}
+              <div class="{{item.status}} segment">
+                <div class="story">{{item.story_slug}}{% if item.initials %}: {{item.initials}} {% else %}- {{item.cast}}{% endif %}</div>
               </div>
             {% endfor %}
           {% endfor %} 
+          </div>
+        {% endfor %}
+        
+        <div class="col-sm-2 frame">
+          <div class="day">Features</div>
+          {% for feature in planning.FEATURES %}
+            <div class="{{feature.status}} segment">
+              <div class="story">{{feature.date}}: {{feature.story_slug}} - {{feature.initials}}</div>
+            </div>
+          {% endfor %}
         </div>
-        {% if loop.index is divisibleby 5 %}
-
-          <div class="clearfix"></div>
-          <div class="col-sm-1 frame"></div>
-
-        {% endif %}
-
-    {% endfor %}
   </div>
 </div>
 

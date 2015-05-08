@@ -2,18 +2,19 @@
 
 
 {% block content %}
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-1 frame"></div>
-        {% for key,value in showboards.DAYS.iteritems() %}
+        {% for key,value in assignments.DAYS.iteritems() %}
         <div class="col-sm-2 frame">
           <div class="day">{{value.day_of_week}}</div>
           <div class="date">{{value.date_str}}</div>
-          {% for show,segments in value.shows.iteritems() %}
-            <div class="show">{{show}}</div>
-            {% for segment in segments %}
-              <div class="{{segment.status}} segment">
-                <div class="story">{{segment.story_slug}}: {{segment.reporter}}</div>
+          {% for cast,items in value.casts.iteritems() %}
+            <div class="show">{{cast}}</div>
+            {% for item in items %}
+              <div class="{{item.status}} segment">
+                <div class="story">{{item.initials}} - {{item.story_slug}}</div>
               </div>
             {% endfor %}
           {% endfor %} 
