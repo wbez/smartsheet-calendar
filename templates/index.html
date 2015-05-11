@@ -3,29 +3,14 @@
 
 {% block content %}
 <div class="container-fluid">
+  <h1>Welcome to Smartsheets!</h1>
     <div class="row">
-        <div class="col-sm-1 frame"></div>
-        {% for key,value in showboards.DAYS.iteritems() %}
-        <div class="col-sm-2 frame">
-          <div class="day">{{value.day_of_week}}</div>
-          <div class="date">{{value.date_str}}</div>
-          {% for show,segments in value.shows.iteritems() %}
-            <div class="show">{{show}}</div>
-            {% for segment in segments %}
-              <div class="{{segment.status}} segment">
-                <div class="story">{{segment.story_slug}}: {{segment.reporter}}</div>
-              </div>
-            {% endfor %}
-          {% endfor %} 
+        <div class="col-sm-6 frame">
+          <div class="day"><a href="/showboards">Showboards</a></div>
         </div>
-        {% if loop.index is divisibleby 5 %}
-
-          <div class="clearfix"></div>
-          <div class="col-sm-1 frame"></div>
-
-        {% endif %}
-
-    {% endfor %}
+        <div class="col-sm-6 frame">
+          <div class="day"><a href="/planning">Planning</a></div>
+        </div>
   </div>
 </div>
 

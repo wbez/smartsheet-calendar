@@ -1,0 +1,40 @@
+{% extends '_base.html' %}
+
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-1 frame"></div>
+        {% for key,value in showboards.DAYS.iteritems() %}
+        <div class="col-sm-2 frame">
+          <div class="day">{{value.day_of_week}}</div>
+          <div class="date">{{value.date_str}}</div>
+          {% for show,segments in value.shows.iteritems() %}
+            <div class="show">{{show}}</div>
+            {% for segment in segments %}
+              <div class="{{segment.status}} segment">
+                <div class="story">{{segment.story_slug}}: {{segment.reporter}}</div>
+              </div>
+            {% endfor %}
+          {% endfor %} 
+        </div>
+        {% if loop.index is divisibleby 5 %}
+
+          <div class="clearfix"></div>
+          <div class="col-sm-1 frame"></div>
+
+        {% endif %}
+
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}
+
+{% block extra_foot %}
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+{% endblock extra_foot %}

@@ -9,16 +9,26 @@
         <div class="col-sm-2 frame">
           <div class="day">{{value.day_of_week}}</div>
           <div class="date">{{value.date_str}}</div>
-          {% for cast,items in value.casts.iteritems() %}
-            {% for item in items %}
+          <div class="show">Anchors</div>
+          {% for item in value.anchors %}
               <div class="{{item.status}} segment">
                 <div class="story">{{item.story_slug}}{% if item.initials %}: {{item.initials}} {% else %}- {{item.cast}}{% endif %}</div>
               </div>
-            {% endfor %}
+          {% endfor %} 
+          <div class="show">Features</div>
+          {% for item in value.features %}
+              <div class="{{item.status}} segment">
+                <div class="story">{{item.story_slug}}{% if item.initials %}: {{item.initials}} {% else %}- {{item.cast}}{% endif %}</div>
+              </div>
+          {% endfor %} 
+          <div class="show">Assignments</div>
+          {% for item in value.cast_items %}
+              <div class="{{item.status}} segment">
+                <div class="story">{{item.story_slug}}{% if item.initials %}: {{item.initials}} {% else %}- {{item.cast}}{% endif %}</div>
+              </div>
           {% endfor %} 
           </div>
         {% endfor %}
-        
         <div class="col-sm-2 frame">
           <div class="day">Features</div>
           {% for feature in planning.FEATURES %}

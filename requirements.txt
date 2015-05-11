@@ -5,7 +5,12 @@ MarkupSafe==0.23
 Werkzeug==0.10.4
 httplib2==0.9
 itsdangerous==0.24
+numpy==1.9.2
+pandas==0.16.1
+python-dateutil==2.4.2
+pytz==2015.2
 rauth==0.4.17
 requests==2.7.0
+six==1.9.0
 smartsheetclient==0.0.1
 wsgiref==0.1.2

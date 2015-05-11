@@ -3,6 +3,7 @@
 import json
 
 import argparse, os
+from collections import OrderedDict
 from flask import Flask, make_response, render_template, redirect, url_for, session, Response, g
 from flask.ext.rauth import RauthOAuth2
 from smartsheet import make_context
@@ -45,13 +46,26 @@ def index():
     """
     Example view demonstrating rendering a simple HTML page.
     """
-    access_token = session.get('access_token')
-    if access_token is None:
-        return redirect(url_for('login'))
+    # access_token = session.get('access_token')
+    # if access_token is None:
+    #     return redirect(url_for('login'))
 
     context = g.data
-
+    context['showboards']['DAYS'] = OrderedDict(sorted(context['showboards']['DAYS'].iteritems(), key=lambda x: x[0]))
     return make_response(render_template('index.html', **context))
+
+@app.route('/showboards')
+def showboards():
+    """
+    Example view demonstrating rendering a simple HTML page.
+    """
+    # access_token = session.get('access_token')
+    # if access_token is None:
+    #     return redirect(url_for('login'))
+
+    context = g.data
+    context['showboards']['DAYS'] = OrderedDict(sorted(context['showboards']['DAYS'].iteritems(), key=lambda x: x[0]))
+    return make_response(render_template('showboards.html', **context))
 
 @app.route('/assignments')
 def assignments():
