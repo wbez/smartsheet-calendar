@@ -19,6 +19,8 @@ app.config.update(
     DEBUG=True
 )
 
+app.debug = True
+
 google = RauthOAuth2(
     name='google',
     base_url='https://www.googleapis.com/oauth2/v1/',
