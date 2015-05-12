@@ -20,7 +20,7 @@ app.config.update(
     SECRET_KEY=os.getenv('SMARTSHEET_SALT'),
     DEBUG=True
 )
-
+app.secret_key=os.getenv('SMARTSHEET_SALT')
 app.debug = True
 
 google = RauthOAuth2(
