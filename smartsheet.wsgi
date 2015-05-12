@@ -7,3 +7,4 @@ logging.basicConfig(stream=sys.stderr)
 sys.path.insert(0, '/srv/smartsheet')
 
 from app import app as application
+application.debug = True

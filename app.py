@@ -27,8 +27,7 @@ google = RauthOAuth2(
     access_token_url='https://accounts.google.com/o/oauth2/token',
     authorize_url='https://accounts.google.com/o/oauth2/auth',
     consumer_key=os.getenv('SMARTSHEET_OAUTH_CLIENT_ID'),
-    consumer_secret=os.getenv('SMARTSHEET_OAUTH_CONSUMER_SECRET'),
-    secret_key=os.getenv('SMARTSHEET_SALT')
+    consumer_secret=os.getenv('SMARTSHEET_OAUTH_CONSUMER_SECRET')
 )
 
 def import_data():
@@ -48,9 +47,9 @@ def index():
     """
     Example view demonstrating rendering a simple HTML page.
     """
-    # access_token = session.get('access_token')
-    # if access_token is None:
-    #     return redirect(url_for('login'))
+    access_token = session.get('access_token')
+    if access_token is None:
+        return redirect(url_for('login'))
 
     context = g.data
     context['showboards']['DAYS'] = OrderedDict(sorted(context['showboards']['DAYS'].iteritems(), key=lambda x: x[0]))
