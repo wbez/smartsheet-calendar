@@ -8,4 +8,4 @@ sys.path.insert(0, '/srv/smartsheet')
 
 from app import app as application
 application.debug = True
-application.secret_key = os.getenv('SMARTSHEET_SALT')
+application.secret_key = os.environ['SMARTSHEET_SALT']

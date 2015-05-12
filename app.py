@@ -15,12 +15,12 @@ app = Flask(__name__)
 # you can specify the consumer key and consumer secret in the application,
 #   like this:
 app.config.update(
-    GOOGLE_CONSUMER_KEY=os.getenv('SMARTSHEET_OAUTH_CLIENT_ID'),
-    GOOGLE_CONSUMER_SECRET=os.getenv('SMARTSHEET_OAUTH_CONSUMER_SECRET'),
-    SECRET_KEY=os.getenv('SMARTSHEET_SALT'),
+    GOOGLE_CONSUMER_KEY=os.environ['SMARTSHEET_OAUTH_CLIENT_ID'],
+    GOOGLE_CONSUMER_SECRET=os.environ['SMARTSHEET_OAUTH_CONSUMER_SECRET'],
+    SECRET_KEY=os.environ['SMARTSHEET_SALT'],
     DEBUG=True
 )
-app.secret_key=os.getenv('SMARTSHEET_SALT')
+app.secret_key=os.environ['SMARTSHEET_SALT']
 app.debug = True
 
 google = RauthOAuth2(
