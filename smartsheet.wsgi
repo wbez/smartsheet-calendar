@@ -6,6 +6,11 @@ import sys, logging, os
 logging.basicConfig(stream=sys.stderr)
 sys.path.insert(0, '/srv/smartsheet')
 
-from app import app as application
-application.debug = True
-application.secret_key = os.environ['SMARTSHEET_SALT']
+def application(environ, start_response):
+    for key in ['SMARTSHEET_TOKEN', 'SMARTSHEET_OAUTH_CLIENT_ID', 'SMARTSHEET_OAUTH_CONSUMER_SECRET', 'SMARTSHEET_SALT' ]:
+        os.environ[key] = environ.get(key, '')
+
+    from app import app as _application
+    _application.secret_key = environ.get('SMARTSHEET_SALT', '')
+
+    return _application(environ, start_response)
