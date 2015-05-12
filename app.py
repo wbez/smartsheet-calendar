@@ -62,9 +62,9 @@ def showboards():
     """
     Example view demonstrating rendering a simple HTML page.
     """
-    # access_token = session.get('access_token')
-    # if access_token is None:
-    #     return redirect(url_for('login'))
+    access_token = session.get('access_token')
+    if access_token is None:
+        return redirect(url_for('login'))
 
     context = g.data
     context['showboards']['DAYS'] = OrderedDict(sorted(context['showboards']['DAYS'].iteritems(), key=lambda x: x[0]))
