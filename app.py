@@ -53,9 +53,7 @@ def index():
     if access_token is None:
         return redirect(url_for('login'))
 
-    context = g.data
-    context['showboards']['DAYS'] = OrderedDict(sorted(context['showboards']['DAYS'].iteritems(), key=lambda x: x[0]))
-    return make_response(render_template('index.html', **context))
+    return make_response(render_template('index.html'))
 
 @app.route('/showboards')
 def showboards():
@@ -93,7 +91,7 @@ def planning():
         return redirect(url_for('login'))
 
     context = g.data
-
+    context['planning']['DAYS'] = OrderedDict(sorted(context['planning']['DAYS'].iteritems(), key=lambda x: x[0]))
     return make_response(render_template('planning.html', **context))
 
 # the Rauth service detects the consumer_key and consumer_secret using
