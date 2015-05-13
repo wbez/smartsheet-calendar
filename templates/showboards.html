@@ -9,14 +9,24 @@
         <div class="col-sm-2 frame">
           <div class="day">{{value.day_of_week}}</div>
           <div class="date">{{value.date_str}}</div>
-          {% for show,segments in value.shows.iteritems() %}
-            <div class="show">{{show}}</div>
-            {% for segment in segments %}
+            <div class="show">Morning Shift</div>
+            {% for segment in value.shows.MS %}
               <div class="{{segment.status}} segment">
                 <div class="story">{{segment.story_slug}}: {{segment.reporter}}</div>
               </div>
             {% endfor %}
-          {% endfor %} 
+            <div class="show">Afternoon Shift</div>
+            {% for segment in value.shows.AS %}
+              <div class="{{segment.status}} segment">
+                <div class="story">{{segment.story_slug}}: {{segment.reporter}}</div>
+              </div>
+            {% endfor %}
+            <div class="show">World View</div>
+            {% for segment in value.shows.WV %}
+              <div class="{{segment.status}} segment">
+                <div class="story">{{segment.story_slug}}: {{segment.reporter}}</div>
+              </div>
+            {% endfor %}
         </div>
         {% if loop.index is divisibleby 5 %}
 

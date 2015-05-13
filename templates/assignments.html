@@ -10,7 +10,7 @@
         <div class="col-sm-2 frame">
           <div class="day">{{value.day_of_week}}</div>
           <div class="date">{{value.date_str}}</div>
-          {% for cast,items in value.casts.iteritems() %}
+          {% for cast in value.casts.iteritems() %}
             <div class="show">{{cast}}</div>
             {% for item in items %}
               <div class="{{item.status}} segment">
