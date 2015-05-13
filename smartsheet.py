@@ -107,7 +107,7 @@ def make_context():
 
 				if row[7] == 'Feature':
 					planning_context['DAYS'][day]['features'].append(day_context)
-				elif row[7] == 'Anchor Name':
+				elif row[7] == 'Anchor':
 					planning_context['DAYS'][day]['anchors'].append(day_context)
 				elif not any(d['story_slug'] == row[3] for d in planning_context['DAYS'][day]['cast_items']):
 					planning_context['DAYS'][day]['cast_items'].append(day_context)
