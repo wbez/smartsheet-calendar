@@ -14,31 +14,31 @@ body, html{
 }
 
 .day {
-	font-size: 36px;
+	font-size: 24px;
 }
 
 .date {
-	font-size: 24px;
+	font-size: 16px;
 	text-align: center;
 	font-style: italic
 }
 
 .show {
-	font-size: 18px;
-	margin-bottom: 5px;
+	font-size: 14px;
+	margin-bottom: 2px;
 	color:#fff;
 	background-color: #666;
 	padding:0px 5px;
 }
 
 .story {
-	font-size: 24px;
+	font-size: 12px;
 }
 
 .segment {
 	font-family:'Roboto',Arial,sans-serif;
 	margin-bottom: 5px;
-	padding:5px 10px 5px 10px;
+	padding:2px 5px 2px 5px;
 }
 
 .reporter {

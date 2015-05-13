@@ -12,19 +12,19 @@
             <div class="show">Morning Shift</div>
             {% for segment in value.shows.MS %}
               <div class="{{segment.status}} segment">
-                <div class="story">{{segment.story_slug}}: {{segment.reporter}}</div>
+                <div class="story">{% if segment.story_slug %}{{segment.story_slug}}: {% endif %}{% if segment.initials %}{{segment.initials}}{% endif %}</div>
               </div>
             {% endfor %}
             <div class="show">Afternoon Shift</div>
             {% for segment in value.shows.AS %}
               <div class="{{segment.status}} segment">
-                <div class="story">{{segment.story_slug}}: {{segment.reporter}}</div>
+                <div class="story">{% if segment.story_slug %}{{segment.story_slug}}: {% endif %}{% if segment.initials %}{{segment.initials}}{% endif %}</div>
               </div>
             {% endfor %}
             <div class="show">World View</div>
             {% for segment in value.shows.WV %}
               <div class="{{segment.status}} segment">
-                <div class="story">{{segment.story_slug}}: {{segment.reporter}}</div>
+                <div class="story">{% if segment.story_slug %}{{segment.story_slug}}: {% endif %}{% if segment.initials %}{{segment.initials}}{% endif %}</div>
               </div>
             {% endfor %}
         </div>
