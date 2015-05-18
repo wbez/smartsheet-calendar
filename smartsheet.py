@@ -151,8 +151,9 @@ def make_context():
 		reporter = row[5]
 		audio_type = row[7]
 		day = row[2]
-		if audio_type == 'Feature' and reporter != None and day != None and cast != None:
-			
+
+		if audio_type == 'Feature' and reporter != None and day != None:
+
 			day_obj = datetime.strptime(day,'%Y-%m-%d').date()
 			day_of_week = day_obj.strftime('%A')
 			date_str = day_obj.strftime('%b %d').lstrip("0").replace(" 0", " ")
@@ -183,7 +184,7 @@ def make_context():
 	remove_days(planning_context['FEATURES'])
 
 	context = {'showboards':showboards_context, 'assignments': assignment_context, 'planning': planning_context}
-	with open('/srv/smartsheet/static/smartsheet.json', 'w') as outfile:
+	with open('static/smartsheet.json', 'w') as outfile:
 		json.dump(context, outfile, sort_keys=True)
 
 def initials(name):
