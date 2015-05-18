@@ -17,7 +17,7 @@ def make_context():
 	showboards_two_days = showboards_today - BDay(3)
 	showboards_two_weeks = showboards_today + BDay(7)
 
-	token = os.getenv('SMARTSHEET_TOKEN')
+	token = os.environ('SMARTSHEET_TOKEN')
 
 	client = smartsheetclient.SmartsheetClient(token)
 	client.connect()
@@ -106,7 +106,8 @@ def make_context():
 					planning_context['DAYS'][day] = {'day_of_week': day_of_week, 'date_str':date_str, 'cast_items':[], 'anchors':[], 'features': []}
 
 				if row[7] == 'Feature':
-					planning_context['DAYS'][day]['features'].append(day_context)
+					if not any(d['story_slug'] == row[3] for d in planning_context['DAYS'][day]['features']):
+						planning_context['DAYS'][day]['features'].append(day_context)
 				elif row[7] == 'Anchor':
 					planning_context['DAYS'][day]['anchors'].append(day_context)
 				elif not any(d['story_slug'] == row[3] for d in planning_context['DAYS'][day]['cast_items']):
