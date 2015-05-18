@@ -184,7 +184,7 @@ def make_context():
 	remove_days(planning_context['FEATURES'])
 
 	context = {'showboards':showboards_context, 'assignments': assignment_context, 'planning': planning_context}
-	with open('static/smartsheet.json', 'w') as outfile:
+	with open('/srv/smartsheet/static/smartsheet.json', 'w') as outfile:
 		json.dump(context, outfile, sort_keys=True)
 
 def initials(name):
