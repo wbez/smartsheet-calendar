@@ -17,7 +17,7 @@ def make_context():
 	showboards_two_days = showboards_today - BDay(3)
 	showboards_two_weeks = showboards_today + BDay(7)
 
-	token = os.environ('SMARTSHEET_TOKEN')
+	token = os.environ['SMARTSHEET_TOKEN']
 
 	client = smartsheetclient.SmartsheetClient(token)
 	client.connect()
