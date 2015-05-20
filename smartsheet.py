@@ -46,8 +46,9 @@ def make_context():
 	columns = [col.title for col in showboards.columns]
 	print "running report for %s" % today
 
+	print "processing showboards"
 	for row in showboards.rows:
-		print "processing showboards"
+		
 		show = row[0]
 		day = row[3]
 		if day != None and show != None:
@@ -76,9 +77,9 @@ def make_context():
 
 				showboards_context['DAYS'][day]['shows'][show].append(day_context)
 
-
+	print "processing rundowns"
 	for row in rundowns.rows:
-		print "processing rundowns"
+		
 		if row[3]=='SAMPLE DAY':
 			break
 		cast = row[1]
@@ -148,9 +149,9 @@ def make_context():
 	# 				planning_context['DAYS'][day]['casts']['Features'].append(day_context)
 	# 			else:
 	# 				planning_context['DAYS'][day]['casts'][cast].append(context)
-
+	print "processing features"
 	for row in features.rows:
-		print "processing features"
+		
 		cast = row[1]
 		reporter = row[5]
 		audio_type = row[7]
