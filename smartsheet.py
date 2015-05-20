@@ -44,8 +44,10 @@ def make_context():
 	planning_context['FEATURES'] = []
 
 	columns = [col.title for col in showboards.columns]
+	print "running report for %s" today
 
 	for row in showboards.rows:
+		print "processing showboards"
 		show = row[0]
 		day = row[3]
 		if day != None and show != None:
@@ -76,6 +78,7 @@ def make_context():
 
 
 	for row in rundowns.rows:
+		print "processing rundowns"
 		if row[3]=='SAMPLE DAY':
 			break
 		cast = row[1]
@@ -147,6 +150,7 @@ def make_context():
 	# 				planning_context['DAYS'][day]['casts'][cast].append(context)
 
 	for row in features.rows:
+		print "processing features"
 		cast = row[1]
 		reporter = row[5]
 		audio_type = row[7]
@@ -185,6 +189,7 @@ def make_context():
 
 	context = {'showboards':showboards_context, 'assignments': assignment_context, 'planning': planning_context}
 	with open('/srv/smartsheet/static/smartsheet.json', 'w') as outfile:
+		print "outputting json"
 		json.dump(context, outfile, sort_keys=True)
 
 def initials(name):
