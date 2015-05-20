@@ -44,7 +44,7 @@ def make_context():
 	planning_context['FEATURES'] = []
 
 	columns = [col.title for col in showboards.columns]
-	print "running report for %s" today
+	print "running report for %s" % today
 
 	for row in showboards.rows:
 		print "processing showboards"
