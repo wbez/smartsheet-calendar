@@ -24,7 +24,7 @@ body, html{
 }
 
 .show {
-	font-size: 14px;
+	font-size: 16px;
 	margin-bottom: 2px;
 	color:#fff;
 	background-color: #666;
@@ -32,7 +32,7 @@ body, html{
 }
 
 .story {
-	font-size: 12px;
+	font-size: 14px;
 }
 
 .segment {
