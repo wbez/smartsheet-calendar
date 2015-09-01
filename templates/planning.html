@@ -8,7 +8,7 @@
         {% for key,value in planning.DAYS.iteritems() %}
         {% if loop.index in [1,2,3] %}
         <div class="col-sm-3 frame">
-          <div class="day {% if loop.index == 3 %}today{% endif %}">{{value.day_of_week}} <span class="date">{{value.date_str}}</span></div>
+          <div class="day {% if loop.index == 2 %}today{% endif %}">{{value.day_of_week}} <span class="date">{{value.date_str}}</span></div>
           <div class="show">Anchors</div>
           {% for item in value.anchors %}
               <span class="{{item.status}} segment">
