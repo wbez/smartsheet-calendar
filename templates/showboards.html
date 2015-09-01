@@ -6,7 +6,7 @@
     <div class="row">
         <!-- <div class="col-sm-1 frame"></div> -->
         {% for key,value in showboards.DAYS.iteritems() %}
-        {% if loop.index in [1,2,3] %}
+        {% if loop.index in [2,3,4] %}
         <div class="col-sm-4 frame">
           <div class="day {% if loop.index == 2 %}today{% endif %}">{{value.day_of_week}} <span class="date">{{value.date_str}}</span></div>
             <div class="show">Morning Shift</div>
