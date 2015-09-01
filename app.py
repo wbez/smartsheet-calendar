@@ -66,6 +66,7 @@ def showboards():
 
     context = g.data
     context['showboards']['DAYS'] = OrderedDict(sorted(context['showboards']['DAYS'].iteritems(), key=lambda x: x[0]))
+    context['planning']['DAYS'] = OrderedDict(sorted(context['planning']['DAYS'].iteritems(), key=lambda x: x[0]))
     return make_response(render_template('showboards.html', **context))
 
 @app.route('/assignments')
