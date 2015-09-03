@@ -8,8 +8,8 @@ from pandas.tseries.offsets import BDay
 
 def make_context():
 	today = date.today().strftime('%Y-%m-%d')
-	two_days_ago = date.today()-timedelta(days=2)
-	two_days_later = date.today()+timedelta(days=2)
+	two_days_ago = date.today()-timedelta(days=1)
+	two_days_later = date.today()+timedelta(days=1)
 	two_weeks_later = date.today()+timedelta(days=10)
 	yesterday = date.today()-timedelta(days=1)
 	tomorrow = date.today()+timedelta(days=1)
@@ -56,11 +56,12 @@ def make_context():
 			day_obj = pd.datetime.strptime(day,'%Y-%m-%d')
 			day_of_week = day_obj.strftime('%A')
 			date_str = day_obj.strftime('%b %d').lstrip("0").replace(" 0", " ")
+			today_flag = (day_obj.strftime('%Y-%m-%d')==today)
 
 			if day_obj >= showboards_two_days and day_obj <= showboards_two_weeks:
 				
 				if day not in showboards_context['DAYS']: 
-					showboards_context['DAYS'][day] = {'day_of_week': day_of_week, 'date_str':date_str, 'shows':OrderedDict()}
+					showboards_context['DAYS'][day] = {'day_of_week': day_of_week, 'date_str':date_str, 'shows':OrderedDict(),'today':today_flag}
 				if show not in showboards_context['DAYS'][day]['shows']: 
 					showboards_context['DAYS'][day]['shows'].update({show:[]})
 			
@@ -90,6 +91,7 @@ def make_context():
 			day_obj = datetime.strptime(day,'%Y-%m-%d').date()
 			day_of_week = day_obj.strftime('%A')
 			date_str = day_obj.strftime('%b %d').lstrip("0").replace(" 0", " ")
+			today_flag = (day_obj.strftime('%Y-%m-%d')==today)
 
 			day_context = {}
 			day_context['cast'] = cast
@@ -107,7 +109,7 @@ def make_context():
 			if day_obj >= two_days_ago and day_obj <= two_days_later:
 				
 				if day not in planning_context['DAYS']: 
-					planning_context['DAYS'][day] = {'day_of_week': day_of_week, 'date_str':date_str, 'cast_items':[], 'anchors':[], 'features': []}
+					planning_context['DAYS'][day] = {'day_of_week': day_of_week, 'date_str':date_str, 'today':today_flag, 'cast_items':[], 'anchors':[], 'features': []}
 
 				if row[7] == 'Feature':
 					if not any(d['story_slug'] == row[3] for d in planning_context['DAYS'][day]['features']):
@@ -189,7 +191,7 @@ def make_context():
 	remove_days(planning_context['FEATURES'])
 
 	context = {'showboards':showboards_context, 'assignments': assignment_context, 'planning': planning_context}
-	with open('/srv/smartsheet/static/smartsheet.json', 'w') as outfile:
+	with open('static/smartsheet.json', 'w') as outfile:
 		print "outputting json"
 		json.dump(context, outfile, sort_keys=True)
 

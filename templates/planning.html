@@ -6,13 +6,13 @@
 <div class="container-fluid">
     <div class="row">
         {% for key,value in planning.DAYS.iteritems() %}
-        {% if loop.index in [1,2,3] %}
+        <!-- {% if loop.index in [1,2,3] %} -->
         <div class="col-sm-3 frame">
-          <div class="day {% if loop.index == 2 %}today{% endif %}">{{value.day_of_week}} <span class="date">{{value.date_str}}</span></div>
+          <div class="day {% if value.today %}today{% endif %}">{{value.day_of_week}} <span class="date">{{value.date_str}}</span></div>
           <div class="show">Anchors</div>
           {% for item in value.anchors %}
               <span class="{{item.status}} segment">
-                <span class="story anchors">{{item.story_slug}} |</span>
+                <span class="story anchors">{{item.story_slug}}{%if loop.last%}{% else %} |{% endif %}</span>
               </span>
           {% endfor %} 
           <div class="show">Features</div>
@@ -28,7 +28,7 @@
               </div>
           {% endfor %} 
           </div>
-        {% endif %}
+        <!-- {% endif %} -->
         {% endfor %}
         <div class="col-sm-3 frame">
           <div class="day">Features</div>
