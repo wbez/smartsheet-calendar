@@ -87,7 +87,7 @@ def make_context():
 		day = row[2]
 		on_board = row[8]
 		item_type = row[7]
-		if day != None and cast != None and item_type != 'Promo':
+		if day != None and day != 'date' and cast != None and item_type != 'Promo':
 			day_obj = datetime.strptime(day,'%Y-%m-%d').date()
 			day_of_week = day_obj.strftime('%A')
 			date_str = day_obj.strftime('%b %d').lstrip("0").replace(" 0", " ")
@@ -191,6 +191,7 @@ def make_context():
 	remove_days(planning_context['FEATURES'])
 
 	context = {'showboards':showboards_context, 'assignments': assignment_context, 'planning': planning_context}
+	
 	with open('/srv/smartsheet/static/smartsheet.json', 'w') as outfile:
 		print "outputting json"
 		json.dump(context, outfile, sort_keys=True)
