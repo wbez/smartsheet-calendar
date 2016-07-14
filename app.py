@@ -6,7 +6,7 @@ import argparse, os
 from collections import OrderedDict
 from flask import Flask, make_response, render_template, redirect, url_for, session, Response, g
 from flask.ext.rauth import RauthOAuth2
-from smartsheet import make_context
+from parse_smartsheet import make_context
 
 current_dir = os.path.dirname(__file__)
 JSON_DATA = os.path.join(current_dir,'static','smartsheet.json')

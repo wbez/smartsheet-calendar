@@ -1,7 +1,7 @@
-import smartsheetclient,json
+import smartsheet
 from collections import OrderedDict
 from datetime import datetime, date, timedelta
-import os
+import os, json
 import pandas as pd
 # BDay is business day, not birthday...
 from pandas.tseries.offsets import BDay
@@ -19,19 +19,17 @@ def make_context():
 
 	token = os.environ['SMARTSHEET_TOKEN']
 
-	client = smartsheetclient.SmartsheetClient(token)
-	client.connect()
-	sheet_list = client.fetchSheetList()
+	client = smartsheet.Smartsheet(token)
 
 	showboardsid = '2812472127186820'
 	rundownsid = '3208506766583684'
 	pegsid = '3311994003580804'
 	featuresid = '5468187845257092'
 
-	showboards = client.fetchSheetById(showboardsid)
-	rundowns = client.fetchSheetById(rundownsid)
-	pegs = client.fetchSheetById(pegsid)
-	features = client.fetchSheetById(featuresid)
+	showboards = client.Sheets.get_sheet(showboardsid,page_size=100000)
+	rundowns = client.Sheets.get_sheet(rundownsid,page_size=100000)
+	# pegs = client.Sheets.get_sheet(pegsid,page_size=100000)
+	features = client.Sheets.get_sheet(featuresid,page_size=100000)
 
 	showboards_context = {}
 	showboards_context['DAYS'] = OrderedDict()
@@ -49,8 +47,9 @@ def make_context():
 	print "processing showboards"
 	for row in showboards.rows:
 		
-		show = row[0]
-		day = row[3]
+		show = row.cells[0].value
+		day = row.cells[3].value
+
 		if day != None and show != None:
 			
 			day_obj = pd.datetime.strptime(day,'%Y-%m-%d')
@@ -67,26 +66,29 @@ def make_context():
 			
 				day_context = {}
 				day_context['show'] = show
-				day_context['status'] = row[1]
-				day_context['segment'] = row[2]
-				day_context['story_slug'] = row[4]
-				day_context['segment_type'] = row[5]
-				day_context['reporter'] = row[6]
-				if row[6] != None:
-					day_context['initials'] = initials(row[6])
-				day_context['category'] = row[7]
+				day_context['status'] = row.cells[1].value
+				day_context['segment'] = row.cells[2].value
+				day_context['story_slug'] = row.cells[4].value
+				day_context['segment_type'] = row.cells[5].value
+				day_context['reporter'] = row.cells[6].value
+				if row.cells[6].display_value != None:
+					day_context['initials'] = initials(row.cells[6].display_value)
+				elif row.cells[6].value != None:
+					day_context['initials'] = initials(row.cells[6].value)
+				day_context['category'] = row.cells[7].value
 
 				showboards_context['DAYS'][day]['shows'][show].append(day_context)
 
 	print "processing rundowns"
 	for row in rundowns.rows:
 		
-		if row[3]=='SAMPLE DAY':
+		if row.cells[3].value=='SAMPLE DAY':
 			break
-		cast = row[1]
-		day = row[2]
-		on_board = row[8]
-		item_type = row[7]
+		cast = row.cells[1].value
+		day = row.cells[2].value
+		on_board = row.cells[8].value
+		item_type = row.cells[7].value
+		print cast,day,on_board,item_type
 		if day != None and day != 'date' and cast != None and item_type != 'Promo':
 			day_obj = datetime.strptime(day,'%Y-%m-%d').date()
 			day_of_week = day_obj.strftime('%A')
@@ -95,34 +97,34 @@ def make_context():
 
 			day_context = {}
 			day_context['cast'] = cast
-			day_context['status'] = row[0]
-			day_context['story_slug'] = row[3]
-			day_context['length'] = row[4]
-			day_context['reporter'] = row[5]
-			if row[5] != None:
-				day_context['initials'] = initials(row[5])
-			day_context['editor'] = row[6]
-			day_context['type'] = row[7]
-			day_context['category'] = row[11]
-			day_context['on_board'] = row[8]
+			day_context['status'] = row.cells[0].value
+			day_context['story_slug'] = row.cells[3].value
+			day_context['length'] = row.cells[4].value
+			day_context['reporter'] = row.cells[5].value
+			if row.cells[5].display_value != None:
+				day_context['initials'] = initials(row.cells[5].display_value)
+			day_context['editor'] = row.cells[6].value
+			day_context['type'] = row.cells[7].value
+			day_context['category'] = row.cells[11].value
+			day_context['on_board'] = row.cells[8].value
 
 			if day_obj >= two_days_ago and day_obj <= two_days_later:
 				
 				if day not in planning_context['DAYS']: 
 					planning_context['DAYS'][day] = {'day_of_week': day_of_week, 'date_str':date_str, 'today':today_flag, 'cast_items':[], 'anchors':[], 'features': []}
 
-				if row[7] == 'Feature':
-					if not any(d['story_slug'] == row[3] for d in planning_context['DAYS'][day]['features']):
+				if row.cells[7].value == 'Feature':
+					if not any(d['story_slug'] == row.cells[3].value for d in planning_context['DAYS'][day]['features']):
 						planning_context['DAYS'][day]['features'].append(day_context)
-				elif row[7] == 'Anchor':
+				elif row.cells[7].value == 'Anchor':
 					planning_context['DAYS'][day]['anchors'].append(day_context)
-				elif not any(d['story_slug'] == row[3] for d in planning_context['DAYS'][day]['cast_items']):
+				elif not any(d['story_slug'] == row.cells[3].value for d in planning_context['DAYS'][day]['cast_items']):
 					planning_context['DAYS'][day]['cast_items'].append(day_context)
 
 	# for row in pegs.rows:
-	# 	cast = row[1]
-	# 	reporter = row[5]
-	# 	day = row[2]
+	# 	cast = row.cells[1]
+	# 	reporter = row.cells[5]
+	# 	day = row.cells[2]
 	# 	if day != None and reporter != None:
 	# 		day_obj = datetime.strptime(day,'%Y-%m-%d').date()
 	# 		day_of_week = day_obj.strftime('%A')
@@ -137,27 +139,27 @@ def make_context():
 			
 	# 			context = {}
 	# 			context['cast'] = cast
-	# 			context['status'] = row[0]
-	# 			context['story_slug'] = row[3]
-	# 			context['length'] = row[4]
+	# 			context['status'] = row.cells[0]
+	# 			context['story_slug'] = row.cells[3]
+	# 			context['length'] = row.cells[4]
 	# 			context['reporter'] = reporter
 	# 			if reporter != None:
 	# 				context['initials'] = initials(reporter)
-	# 			context['editor'] = row[6]
-	# 			context['type'] = row[7]
-	# 			context['category'] = row[10]
+	# 			context['editor'] = row.cells[6]
+	# 			context['type'] = row.cells[7]
+	# 			context['category'] = row.cells[10]
 
-	# 			if row[7] == 'Feature':
+	# 			if row.cells[7] == 'Feature':
 	# 				planning_context['DAYS'][day]['casts']['Features'].append(day_context)
 	# 			else:
 	# 				planning_context['DAYS'][day]['casts'][cast].append(context)
 	print "processing features"
 	for row in features.rows:
 		
-		cast = row[1]
-		reporter = row[5]
-		audio_type = row[7]
-		day = row[2]
+		cast = row.cells[1].value
+		reporter = row.cells[5].value
+		audio_type = row.cells[7].value
+		day = row.cells[2].value
 
 		if audio_type == 'Feature' and reporter != None and day != None:
 
@@ -169,16 +171,18 @@ def make_context():
 				context = {}
 				context['day'] = day_obj
 				context['date']= date_str
-				context['status'] = row[0]
-				context['cast'] = row[1]
-				context['story_slug'] = row[3]
-				context['format'] = row[4]
+				context['status'] = row.cells[0].value
+				context['cast'] = row.cells[1].value
+				context['story_slug'] = row.cells[3].value
+				context['format'] = row.cells[4].value
 				context['reporter'] = reporter
-				if reporter != None:
+				if row.cells[5].display_value != None:
+					context['initials'] = initials(row.cells[5].display_value)
+				elif reporter != None:
 					context['initials'] = initials(reporter)
-				context['editor'] = row[6]
-				context['type'] = row[7]
-				context['category'] = row[10]
+				context['editor'] = row.cells[6].value
+				context['type'] = row.cells[7].value
+				context['category'] = row.cells[10].value
 
 				planning_context['FEATURES'].append(context)
 
@@ -192,7 +196,7 @@ def make_context():
 
 	context = {'showboards':showboards_context, 'assignments': assignment_context, 'planning': planning_context}
 	
-	with open('/srv/smartsheet/static/smartsheet.json', 'w') as outfile:
+	with open('static/smartsheet.json', 'w') as outfile:
 		print "outputting json"
 		json.dump(context, outfile, sort_keys=True)
 
