@@ -6,6 +6,8 @@ import pandas as pd
 # BDay is business day, not birthday...
 from pandas.tseries.offsets import BDay
 
+FILE_DIR = os.path.dirname(os.path.realpath(__file__))
+
 def make_context():
 	today = date.today().strftime('%Y-%m-%d')
 	two_days_ago = date.today()-timedelta(days=1)
@@ -195,9 +197,12 @@ def make_context():
 	remove_days(planning_context['FEATURES'])
 
 	context = {'showboards':showboards_context, 'assignments': assignment_context, 'planning': planning_context}
+
+	file_location = "%s/static/smartsheet.json" % FILE_DIR
 	
-	with open('static/smartsheet.json', 'w') as outfile:
+	with open(file_location, 'w') as outfile:
 		print "outputting json"
+		
 		json.dump(context, outfile, sort_keys=True)
 
 def initials(name):
