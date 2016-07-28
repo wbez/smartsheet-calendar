@@ -90,7 +90,7 @@ def make_context():
 		day = row.cells[2].value
 		on_board = row.cells[8].value
 		item_type = row.cells[7].value
-		print cast,day,on_board,item_type
+
 		if day != None and day != 'date' and cast != None and item_type != 'Promo':
 			day_obj = datetime.strptime(day,'%Y-%m-%d').date()
 			day_of_week = day_obj.strftime('%A')
@@ -200,7 +200,7 @@ def make_context():
 
 	file_location = "%s/static/smartsheet.json" % FILE_DIR
 	
-	with open(file_location, 'w') as outfile:
+	with open('/srv/smartsheet/static/smartsheet.json', 'w') as outfile:
 		print "outputting json"
 		
 		json.dump(context, outfile, sort_keys=True)
